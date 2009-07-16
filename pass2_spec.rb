@@ -68,6 +68,31 @@ describe "the rubypassgen executable" do
   
 end
 
-describe "the passgenweb.rb web application" do
+require File.join(File.dirname(__FILE__),'passgenweb')
+require 'spec'
+require 'spec/interop/test'
+require 'rack/test'
+require 'spec'
+require 'spec/interop/test'
+require 'rack/test'
+ 
+set :environment, :test
+ 
+Spec::Runner.configure do |config|
   
+  config.include Rack::Test::Methods
+ 
+  def app
+    Sinatra::Application
+  end
+ 
 end
+
+describe PassgenWeb do
+  it "says hello" do
+    get '/'
+    last_response.should be_ok
+    last_response.body.should == 'Hello World'
+  end
+end
+
