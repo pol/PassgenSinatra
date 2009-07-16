@@ -13,6 +13,11 @@ get '/action' do
 end
 
 get '/passgen/:number/:length' do |num,len|
-   @passwords = Passgen.new.generate_series(num,len)
+  @passwords = Passgen.new.generate_series(num,len)
   haml :passwords
+end
+
+get '/stylesheet.css' do
+  header 'Content-Type' => 'text/css; charset=utf-8'
+  sass :stylesheet
 end
