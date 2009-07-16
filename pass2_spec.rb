@@ -19,10 +19,10 @@ describe "Passgen 2 Specs" do
     @p.generate(10).length.should == 10
   end
   
-  it "should be random enough" do
+  it "should be random enough to generate 100 different passwords of length 5" do
     passes = []
-    10.times do
-      p = @p.generate
+    100.times do
+      p = @p.generate(5)
       passes.should_not be_include(p)
       passes << @p.generate
     end
@@ -33,6 +33,12 @@ describe "Passgen 2 Specs" do
     s.length.should == 4
     s.should be_instance_of(Array)
     s.each { |m| m.should be_instance_of(String) }
+  end
+  
+  it "should work if the params are strings" do
+    s = @p.generate_series('5','10')
+    s.length.should == 5
+    s.each {|p| p.should be_instance_of(String) }
   end
   
 end
@@ -59,5 +65,9 @@ describe "the rubypassgen executable" do
     passlist.split("\n").length.should == 4
     passlist.split("\n").select { |pass| pass.length == 5}.length.should == 4    
   end
+  
+end
+
+describe "the passgenweb.rb web application" do
   
 end

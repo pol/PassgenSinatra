@@ -1,11 +1,11 @@
 class Passgen
   
   def generate(len = 8)
-    random_alpha_string(len)
+    random_alpha_string(len.to_i)
   end
   
   def generate_series(num,len = 8)
-    (1..num).to_a.map { |s| generate(len) }
+    (1..num.to_i).to_a.map { |s| generate(len) }
   end
   
   private
